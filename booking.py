@@ -1,4 +1,3 @@
-from os import access
 from square.client import Client
 
 
@@ -8,6 +7,8 @@ client = Client(
 )
 
 #get instance of Square API I want to call
+bookings_api = client.bookings
+
 api_locations = client.locations
 
 #Call list_locations to get all locations in account
@@ -32,4 +33,15 @@ elif result.is_error():
         #each error is a dictionary
         for key, value in error.items():
             print(f'key {key} : value {value}')
-        print('\n')
+        print('\n') 
+
+
+bookable_only = False
+limit = 172
+cursor = 'cursor6'
+
+#this block is giving errors
+booking_profiles = bookings_api.list_team_member_booking_profiles(bookable_only, limit, cursor)
+
+print(booking_profiles)
+
